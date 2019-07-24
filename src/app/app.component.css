@@ -1,0 +1,12 @@
+.tblRepos th, .tblRepos td {
+    border: 1px solid #ddd !important;
+    padding: 2px;
+    margin: 0px;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+}
+
+.tblRepos td {
+    font-size: 14px;
+}

@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <span class="text-success">
+        Welcome
+    </span>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="GithubUserName">Enter Github User Name</label>
+                <input [(ngModel)]="userName" name="userName" (keyup.enter)="onSearch()" type="text" class="form-control">
+            </div>
+            <button id="btnSearch" class="btn btn-primary" (click)="onSearch()">Search</button>
+        </div>
+
+        <ng-container *ngIf="responseModel">
+            <div *ngIf="responseModel.avatar_url" class="col-md-3">
+                <img [src]="responseModel.avatar_url" class="img-responsive" alt="Avtar" height="100" width="100" />
+            </div>
+            <div *ngIf="responseModel.name" class="col-md-3">
+                Name: <label>{{ responseModel.name }}</label>
+            </div>
+            <div *ngIf="responseModel.location" class="col-md-3">
+                Location: <label>{{ responseModel.location }}</label>
+            </div>
+        </ng-container>
+    </div>
+
+    <ng-container *ngIf="responseModel && responseModel.repos && responseModel.repos.length > 0">
+        <hr />
+
+        <p>Repos with higher Stargazers Count</p>
+
+        <table class="table table-bordered tblRepos">
+            <thead>
+                <tr>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Url
+                    </th>
+                    <th>
+                        Stargazers Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let repo of responseModel.repos">
+                    <tr>
+                        <td>
+                            {{ repo.description }}
+                        </td>
+                        <td>
+                            {{ repo.url }}
+                        </td>
+                        <td>
+                            {{ repo.stargazers_count }}
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </ng-container>
+</div>
